@@ -8,26 +8,21 @@ router.get("/",(req,res) => {
     res.send("Hello from Server 2");
 });
 
-router.post("/data" , (req,res) => {
-const {tokenname,price,date} = req.body;
+router.post("/coins", async(req,res)=>{
+    console.log(req.body)
+   const data = new  ApiData();
+   data.tokenname=req.body.name;
+   data.price=req.body.price;
+   data.date=req.body.date;
+   console.log(data)
+   data.save().then((res)=>{console.log(res)})
+     res.send(data);
 
-if(!tokenname || !price || !date){
-    return res.status(422).json({error:"Invalid attemp"})
-}
+  })
 
-ApiData.findOne({tokenname:tokenname}).then((avl) => {
-    if(avl){
-        return res.status(422).json({error: "Already exits"});
-    }
+  router.get("/getcoins", async(req,res)=>{
+    var coin = await ApiData.find()
+    res.send(coin)
+  })
 
-    const data = new ApiData({tokenname,price,date});
-   
-   data.save().then(() => {
-       res.status(201).json({message:"Data added successfully"});
-
-   }).catch((err) => res.status(500).json({error:"Failed"}));
-}).then(err => {console.log(err);})
-    // console.log(req.body);
-    // res.json({message:req.body});
-})
 module.exports = router;
