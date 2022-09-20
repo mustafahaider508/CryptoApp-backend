@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
+
 dotenv.config({path:'./config.env'});
 require('./db');
 
@@ -28,10 +29,9 @@ const middleware = (req,res,next) => {
 }
 
 app.use(require("./router/auth"));
+app.use(require("./router/api"));
 
-app.get("/api", middleware ,(req,res) => {
-    res.send("Hello from Backend Api");
-});
+
 
 app.listen(PORT,() => {
     console.log("server is on");

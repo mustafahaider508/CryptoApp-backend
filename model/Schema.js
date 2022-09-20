@@ -1,10 +1,13 @@
+const { default: axios } = require("axios");
+const express = require("express");
+const router = express.Router();
 const mongoose = require("mongoose");
 
 
 const Schema = new mongoose.Schema({
     tokenname:{
         type:String,
-        require:[true,"Please fill the gender field"],
+        require:true,
         trim:true,
     },
     price:{
@@ -18,5 +21,7 @@ const Schema = new mongoose.Schema({
     
 })
 
-const ApiData = mongoose.model("Values",Schema);
+const ApiData = mongoose.model("Datavalues",Schema);
+
+
 module.exports = ApiData;
