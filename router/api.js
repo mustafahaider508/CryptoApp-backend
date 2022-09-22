@@ -45,5 +45,6 @@ router.post("/api", (req,res,next) => {
 router.get("/getapi", async(req,res)=>{
     var Api = await ApiData.find()
     res.send(Api)
+    
   })
 module.exports = router;

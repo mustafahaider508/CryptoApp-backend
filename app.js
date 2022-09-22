@@ -1,6 +1,7 @@
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const express = require('express');
+const { default: axios } = require('axios');
 const app = express();
 
 
@@ -10,7 +11,6 @@ require('./db');
 // const ApiData = require('./model/Schema'); 
 
 const PORT = process.env.PORT;
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
@@ -30,6 +30,9 @@ const middleware = (req,res,next) => {
 
 app.use(require("./router/auth"));
 app.use(require("./router/api"));
+app.use(require("./router/graphapi"));
+
+
 
 app.listen(PORT,() => {
     console.log("server is on");
