@@ -31,8 +31,6 @@ const middleware = (req,res,next) => {
 app.use(require("./router/auth"));
 app.use(require("./router/api"));
 
-
-
 app.listen(PORT,() => {
     console.log("server is on");
 })
